@@ -14,6 +14,8 @@
 		171E0C871B8E5B84001E6242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 171E0C861B8E5B84001E6242 /* Assets.xcassets */; };
 		171E0C8A1B8E5B84001E6242 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171E0C881B8E5B84001E6242 /* LaunchScreen.storyboard */; };
 		171E0CAE1B8E5C58001E6242 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E0CAD1B8E5C58001E6242 /* Room.swift */; };
+		A09B19F21CAC5EEF006AB25B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A09B19F11CAC5EEF006AB25B /* CoreLocation.framework */; };
+		A09B19F41CAC622F006AB25B /* Draw2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09B19F31CAC622F006AB25B /* Draw2D.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		171E0C891B8E5B84001E6242 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		171E0C8B1B8E5B84001E6242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		171E0CAD1B8E5C58001E6242 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		A09B19F11CAC5EEF006AB25B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A09B19F31CAC622F006AB25B /* Draw2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draw2D.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09B19F21CAC5EEF006AB25B /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,7 @@
 		171E0C711B8E5B84001E6242 = {
 			isa = PBXGroup;
 			children = (
+				A09B19F11CAC5EEF006AB25B /* CoreLocation.framework */,
 				171E0C7C1B8E5B84001E6242 /* RoomSearch */,
 				171E0C7B1B8E5B84001E6242 /* Products */,
 			);
@@ -66,9 +72,9 @@
 				171E0C861B8E5B84001E6242 /* Assets.xcassets */,
 				171E0C881B8E5B84001E6242 /* LaunchScreen.storyboard */,
 				171E0C8B1B8E5B84001E6242 /* Info.plist */,
+				A09B19F31CAC622F006AB25B /* Draw2D.swift */,
 			);
-			name = RoomSearch;
-			path = CandySearch;
+			path = RoomSearch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +108,7 @@
 				TargetAttributes = {
 					171E0C791B8E5B84001E6242 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 32DJZQM473;
 					};
 				};
 			};
@@ -144,6 +151,7 @@
 				171E0C821B8E5B84001E6242 /* DetailViewController.swift in Sources */,
 				171E0CAE1B8E5C58001E6242 /* Room.swift in Sources */,
 				171E0C801B8E5B84001E6242 /* MasterViewController.swift in Sources */,
+				A09B19F41CAC622F006AB25B /* Draw2D.swift in Sources */,
 				171E0C7E1B8E5B84001E6242 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,9 +265,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = CandySearch/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RoomSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.CandySearch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.RoomSearch;
 				PRODUCT_NAME = RoomSearch;
 			};
 			name = Debug;
@@ -268,9 +277,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = CandySearch/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RoomSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.CandySearch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.RoomSearch;
 				PRODUCT_NAME = RoomSearch;
 			};
 			name = Release;

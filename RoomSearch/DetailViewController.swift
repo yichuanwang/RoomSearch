@@ -21,11 +21,12 @@
 */
 
 import UIKit
+import CoreLocation
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, CLLocationManagerDelegate {
     
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var roomImageView: UIImageView!
+    var locationManager: CLLocationManager!
     
     var detailRoom: Room? {
         didSet {
@@ -35,8 +36,7 @@ class DetailViewController: UIViewController {
     
     func configureView() {
         if let detailRoom = detailRoom {
-            if let detailDescriptionLabel = detailDescriptionLabel, roomImageView = roomImageView {
-                detailDescriptionLabel.text = detailRoom.name
+            if let roomImageView = roomImageView {
                 roomImageView.image = UIImage(named: detailRoom.name)
                 title = detailRoom.category
             }
@@ -46,10 +46,42 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location:CLLocation = locations[0] as CLLocation
+        // print("locations = \(locations)")
+        
+        // latitudeLabel.text = "\(location.coordinate.latitude)"
+        // longitudeLabel.text = "\(location.coordinate.longitude)"
+        let long = location.coordinate.longitude;
+        let lat = location.coordinate.latitude;
+       // longitudeLabel.text = long
+       // latitudeLabel.text = lat
+        
+        
+        //    var userLocation:CLLocation = locations[0] as! CLLocation
+        
+        //   print(long)
+        //   print(lat)
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error while updating location" + error.localizedDescription)
+    }
+    
+    func locationManagerDidPauseLocationUpdates(manager: CLLocationManager) {
+        
     }
     
 }

@@ -41,17 +41,30 @@ class MasterViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         
         // Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Classroom", "Conference room", "Auditorium"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Classroom", "Conference", "Theater"]
         tableView.tableHeaderView = searchController.searchBar
         
         rooms = [
             Room(category:"Classroom", name:"101"),
             Room(category:"Classroom", name:"102"),
             Room(category:"Classroom", name:"103"),
-            Room(category:"Conference room", name:"111"),
-            Room(category:"Conference room", name:"113"),
-            Room(category:"Conference room", name:"114"),
-            Room(category:"Auditorium", name:"124")]
+            Room(category:"Classroom", name:"107"),
+            Room(category:"Classroom", name:"108"),
+            Room(category:"Classroom", name:"201"),
+            Room(category:"Classroom", name:"202"),
+            Room(category:"Classroom", name:"203"),
+            Room(category:"Classroom", name:"207"),
+            Room(category:"Classroom", name:"208"),
+            Room(category:"Classroom", name:"209A"),
+            Room(category:"Classroom", name:"212A"),
+            Room(category:"Conference", name:"110G"),
+            Room(category:"Conference", name:"111"),
+            Room(category:"Conference", name:"113"),
+            Room(category:"Conference", name:"114"),
+            Room(category:"Food", name:"120"),
+            Room(category:"Department", name:"Dean's office"),
+            Room(category:"Theater", name:"124"),
+            Room(category:"All", name:"Second floor"),]
         
         if let splitViewController = splitViewController {
             let controllers = splitViewController.viewControllers
