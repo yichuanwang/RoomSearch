@@ -62,10 +62,10 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
         let location:CLLocation = locations[0] as CLLocation
         // print("locations = \(locations)")
         
-        // latitudeLabel.text = "\(location.coordinate.latitude)"
-        // longitudeLabel.text = "\(location.coordinate.longitude)"
-        let long = location.coordinate.longitude;
-        let lat = location.coordinate.latitude;
+        print("latitude:\(location.coordinate.latitude)")
+        print("longitude\(location.coordinate.longitude)")
+        //let long = location.coordinate.longitude;
+        //let lat = location.coordinate.latitude;
        // longitudeLabel.text = long
        // latitudeLabel.text = lat
         
@@ -77,7 +77,7 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location" + error.localizedDescription)
+       // print("Error while updating location" + error.localizedDescription)
     }
     
     func locationManagerDidPauseLocationUpdates(manager: CLLocationManager) {

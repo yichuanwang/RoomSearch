@@ -25,13 +25,18 @@ import UIKit
 class MasterViewController: UITableViewController {
     
     // Properties
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: Draw2D? = nil
     var rooms = [Room]()
+    var blank = " "
     var filteredRooms = [Room]()
     let searchController = UISearchController(searchResultsController: nil)
     
+//    struct MyLocation {
+//        static var point = (x,y)
+//    }
+    
     // View Setup
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
         
         // Search Controller
@@ -45,30 +50,72 @@ class MasterViewController: UITableViewController {
         tableView.tableHeaderView = searchController.searchBar
         
         rooms = [
-            Room(category:"Classroom", name:"101"),
-            Room(category:"Classroom", name:"102"),
-            Room(category:"Classroom", name:"103"),
-            Room(category:"Classroom", name:"107"),
-            Room(category:"Classroom", name:"108"),
-            Room(category:"Classroom", name:"201"),
-            Room(category:"Classroom", name:"202"),
-            Room(category:"Classroom", name:"203"),
-            Room(category:"Classroom", name:"207"),
-            Room(category:"Classroom", name:"208"),
-            Room(category:"Classroom", name:"209A"),
-            Room(category:"Classroom", name:"212A"),
-            Room(category:"Conference", name:"110G"),
-            Room(category:"Conference", name:"111"),
-            Room(category:"Conference", name:"113"),
-            Room(category:"Conference", name:"114"),
-            Room(category:"Food", name:"120"),
-            Room(category:"Department", name:"Dean's office"),
-            Room(category:"Theater", name:"124"),
-            Room(category:"All", name:"Second floor"),]
+            Room(category:"Classroom", name:"101", person:" "),
+            Room(category:"Classroom", name:"102", person:" "),
+            Room(category:"Classroom", name:"103", person:" "),
+            Room(category:"Classroom", name:"107", person:" "),
+            Room(category:"Classroom", name:"108", person:" "),
+            Room(category:"Classroom", name:"201", person:" "),
+            Room(category:"Classroom", name:"202", person:" "),
+            Room(category:"Classroom", name:"203", person:" "),
+            Room(category:"Classroom", name:"207", person:" "),
+            Room(category:"Classroom", name:"208", person:" "),
+            Room(category:"Classroom", name:"209A", person:" "),
+            Room(category:"Classroom", name:"212A", person:" "),
+            Room(category:"Conference", name:"110G", person:" "),
+            Room(category:"Conference", name:"111", person:" "),
+            Room(category:"Conference", name:"113", person:" "),
+            Room(category:"Conference", name:"114", person:" "),
+            Room(category:"Food", name:"120", person:" "),
+            Room(category:"Office", name:"303A", person:"Balch Bradley"),
+            Room(category:"Office", name:"302A", person:"Balch Tonya"),
+            Room(category:"Office", name:"303C", person:"Ball Carrie"),
+            Room(category:"Office", name:"329D", person:"Bauserman Kathryn"),
+            Room(category:"Office", name:"323A", person:"Boileau Tim"),
+            Room(category:"Office", name:"309C", person:"Bolinger Kevin"),
+            Room(category:"Office", name:"328A", person:"Burden Robin"),
+            Room(category:"Office", name:"302C", person:"Clifford Kathleen"),
+            Room(category:"Office", name:"314B", person:"Corey Noble"),
+            Room(category:"Office", name:"326A", person:"Donlan Ryan"),
+            Room(category:"Office", name:"301A", person:"Ganapathy–Coleman Hemalatha"),
+            Room(category:"Office", name:"311B", person:"Hammen Vicki"),
+            Room(category:"Office", name:"309D", person:"Hampton Eric"),
+            Room(category:"Office", name:"310A", person:"Hess julie"),
+            Room(category:"Office", name:"327C", person:"Hinshaw Rebecca"),
+            Room(category:"Office", name:"321C", person:"Hinton Kandace"),
+            Room(category:"Office", name:"321D", person:"Howard-Hamilton Mary"),
+            Room(category:"Office", name:"311A", person:"Hubnall Faith"),
+            Room(category:"Office", name:"315C", person:"Kinger Sue"),
+            Room(category:"Office", name:"323C", person:"Lai Feng-Qi"),
+            Room(category:"Office", name:"329A", person:"Leinenbacj Marylin"),
+            Room(category:"Office", name:"310C", person:"Liu Karen"),
+            Room(category:"Office", name:"301C", person:"Lutrell Lee Anne"),
+            Room(category:"Office", name:"304B", person:"MacDonald Chris"),
+            Room(category:"Office", name:"327B", person:"Maynard Jack"),
+            Room(category:"Office", name:"317C", person:"McDaniel Terry"),
+            Room(category:"Office", name:"310B", person:"McQueen Kand"),
+            Room(category:"Office", name:"317D", person:"Monahan Bobbie Jo"),
+            Room(category:"Office", name:"326B", person:"Nail Melissa"),
+            Room(category:"Office", name:"302D", person:"Nellis Leah"),
+            Room(category:"Office", name:"332B", person:"Park Yong Joon"),
+            Room(category:"Office", name:"310D", person:"Roberts-Pittman Bridget"),
+            Room(category:"Office", name:"309A", person:"Sailes JaDora"),
+            Room(category:"Office", name:"303D", person:"Solesky Amanda"),
+            Room(category:"Office", name:"315C", person:"Thacker Della"),
+            Room(category:"Office", name:"323B", person:"Tinnerman Larry"),
+            Room(category:"Office", name:"333C", person:"Tucker Catherine"),
+            Room(category:"Office", name:"301D", person:"Viviani Anna"),
+            Room(category:"Office", name:"329B", person:"Wheeler Patricia"),
+            Room(category:"Office", name:"329C", person:"Whitaker Beth"),
+            Room(category:"Office", name:"317B", person:"Whitaker Todd"),
+            Room(category:"Office", name:"315A", person:"Woolard Cassandra"),
+            Room(category:"Theater", name:"124", person:" "),
+            Room(category:"All", name:"Second floor", person:" "),
+            Room(category:"All", name:"Third floor", person:" ")]
         
         if let splitViewController = splitViewController {
             let controllers = splitViewController.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? Draw2D
         }
     }
     
@@ -101,7 +148,7 @@ class MasterViewController: UITableViewController {
         } else {
             room = rooms[indexPath.row]
         }
-        cell.textLabel!.text = room.name
+        cell.textLabel!.text = room.name + blank + room.person
         cell.detailTextLabel!.text = room.category
         return cell
     }
@@ -109,7 +156,7 @@ class MasterViewController: UITableViewController {
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredRooms = rooms.filter({( room : Room) -> Bool in
             let categoryMatch = (scope == "All") || (room.category == scope)
-            return categoryMatch && room.name.lowercaseString.containsString(searchText.lowercaseString)
+            return categoryMatch && room.name.lowercaseString.containsString(searchText.lowercaseString) || room.person.lowercaseString.containsString(searchText.lowercaseString)
         })
         tableView.reloadData()
     }
@@ -124,7 +171,7 @@ class MasterViewController: UITableViewController {
                 } else {
                     room = rooms[indexPath.row]
                 }
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! Draw2D
                 controller.detailRoom = room
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true

@@ -14,6 +14,7 @@
 		171E0C871B8E5B84001E6242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 171E0C861B8E5B84001E6242 /* Assets.xcassets */; };
 		171E0C8A1B8E5B84001E6242 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171E0C881B8E5B84001E6242 /* LaunchScreen.storyboard */; };
 		171E0CAE1B8E5C58001E6242 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171E0CAD1B8E5C58001E6242 /* Room.swift */; };
+		621FBB571CAE0C8A0086AB82 /* Draw2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FBB561CAE0C8A0086AB82 /* Draw2DView.swift */; };
 		A09B19F21CAC5EEF006AB25B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A09B19F11CAC5EEF006AB25B /* CoreLocation.framework */; };
 		A09B19F41CAC622F006AB25B /* Draw2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09B19F31CAC622F006AB25B /* Draw2D.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		171E0C891B8E5B84001E6242 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		171E0C8B1B8E5B84001E6242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		171E0CAD1B8E5C58001E6242 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		621FBB561CAE0C8A0086AB82 /* Draw2DView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draw2DView.swift; sourceTree = "<group>"; };
 		A09B19F11CAC5EEF006AB25B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A09B19F31CAC622F006AB25B /* Draw2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draw2D.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				171E0C881B8E5B84001E6242 /* LaunchScreen.storyboard */,
 				171E0C8B1B8E5B84001E6242 /* Info.plist */,
 				A09B19F31CAC622F006AB25B /* Draw2D.swift */,
+				621FBB561CAE0C8A0086AB82 /* Draw2DView.swift */,
 			);
 			path = RoomSearch;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			files = (
 				171E0C821B8E5B84001E6242 /* DetailViewController.swift in Sources */,
 				171E0CAE1B8E5C58001E6242 /* Room.swift in Sources */,
+				621FBB571CAE0C8A0086AB82 /* Draw2DView.swift in Sources */,
 				171E0C801B8E5B84001E6242 /* MasterViewController.swift in Sources */,
 				A09B19F41CAC622F006AB25B /* Draw2D.swift in Sources */,
 				171E0C7E1B8E5B84001E6242 /* AppDelegate.swift in Sources */,

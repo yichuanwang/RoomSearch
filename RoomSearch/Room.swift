@@ -25,4 +25,5 @@ import Foundation
 struct Room {
     let category : String
     let name : String
+    let person : String
 }
