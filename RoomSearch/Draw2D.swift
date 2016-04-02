@@ -8,7 +8,10 @@
 
 import UIKit
 
-class Draw2D: DetailViewController {
+class Draw2D: UIView {
+    
+    drawView.frame = self.view.bounds
+    swlf.view.addSubview(drawView)
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -17,7 +20,7 @@ class Draw2D: DetailViewController {
         // Drawing code
     }
     */
-    func drawRect(rect: CGRect)
+    override func drawRect(rect: CGRect)
     {
         let context = UIGraphicsGetCurrentContext()
         CGContextSetLineWidth(context, 2.0)
