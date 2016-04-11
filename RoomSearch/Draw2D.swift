@@ -8,15 +8,22 @@
 
 import UIKit
 
-<<<<<<< HEAD
+
 class Draw2D: DetailViewController {
   let drawView:Draw2DView = Draw2DView();
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    drawView.frame = CGRectMake(100,100,200,200)
-    drawView.backgroundColor = UIColor.clearColor()
+    //drawView.frame = CGRectMake(0,0,200,200)
+    //drawView.backgroundColor = UIColor.clearColor()
+    let circlePath = UIBezierPath(arcCenter: CGPoint(x: CGFloat(lat),y: CGFloat(long)), radius: CGFloat(10), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = circlePath.CGPath
+    shapeLayer.fillColor = UIColor.redColor().CGColor
+    shapeLayer.strokeColor = UIColor.redColor().CGColor
+    shapeLayer.lineWidth = 3.0
+    view.layer.addSublayer(shapeLayer)
     self.view .addSubview(drawView)
     // Do any additional setup after loading the view.
   }
@@ -27,12 +34,12 @@ class Draw2D: DetailViewController {
   }
 
   
-=======
-class Draw2D: UIView {
+
+//class Draw2D: UIView {
     
-    drawView.frame = self.view.bounds
-    swlf.view.addSubview(drawView)
->>>>>>> origin/master
+ //   drawView.frame = self.view.bounds
+  //  swlf.view.addSubview(drawView)
+
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -41,33 +48,5 @@ class Draw2D: UIView {
         // Drawing code
     }
     */
-<<<<<<< HEAD
-//    func drawRect(rect: CGRect)
-//    {
-//        let context = UIGraphicsGetCurrentContext()
-//        CGContextSetLineWidth(context, 2.0)
-//        CGContextSetStrokeColorWithColor(context,
-//                                         UIColor.blueColor().CGColor)
-//        CGContextMoveToPoint(context, 100, 100)
-//        CGContextAddLineToPoint(context, 150, 150)
-//        CGContextAddLineToPoint(context, 100, 200)
-//        CGContextAddLineToPoint(context, 50, 150)
-//        CGContextAddLineToPoint(context, 100, 100)
-//        CGContextStrokePath(context)
-//    }
-=======
-    override func drawRect(rect: CGRect)
-    {
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(context, 2.0)
-        CGContextSetStrokeColorWithColor(context,
-                                         UIColor.blueColor().CGColor)
-        CGContextMoveToPoint(context, 100, 100)
-        CGContextAddLineToPoint(context, 150, 150)
-        CGContextAddLineToPoint(context, 100, 200)
-        CGContextAddLineToPoint(context, 50, 150)
-        CGContextAddLineToPoint(context, 100, 100)
-        CGContextStrokePath(context)
     }
->>>>>>> origin/master
-}
+
