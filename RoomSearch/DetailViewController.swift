@@ -23,10 +23,11 @@
 import UIKit
 import CoreLocation
 
-class DetailViewController: UIViewController, CLLocationManagerDelegate {
+ 
+
+class DetailViewController: UIViewController {
     
     @IBOutlet weak var roomImageView: UIImageView!
-    var locationManager: CLLocationManager!
     
     var detailRoom: Room? {
         didSet {
@@ -46,43 +47,14 @@ class DetailViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location:CLLocation = locations[0] as CLLocation
-        // print("locations = \(locations)")
-        
-        print("latitude:\(location.coordinate.latitude)")
-        print("longitude\(location.coordinate.longitude)")
-        //let long = location.coordinate.longitude;
-        //let lat = location.coordinate.latitude;
-       // longitudeLabel.text = long
-       // latitudeLabel.text = lat
-        
-        
-        //    var userLocation:CLLocation = locations[0] as! CLLocation
-        
-        //   print(long)
-        //   print(lat)
-    }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-       // print("Error while updating location" + error.localizedDescription)
-    }
-    
-    func locationManagerDidPauseLocationUpdates(manager: CLLocationManager) {
-        
-    }
     
 }
 

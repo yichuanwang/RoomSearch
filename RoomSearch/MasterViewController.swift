@@ -21,8 +21,11 @@
 */
 
 import UIKit
+import CoreLocation
+var long = 0.0
+var lat = 0.0
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     // Properties
     var detailViewController: Draw2D? = nil
@@ -30,24 +33,28 @@ class MasterViewController: UITableViewController {
     var blank = " "
     var filteredRooms = [Room]()
     let searchController = UISearchController(searchResultsController: nil)
+    var locationManager: CLLocationManager!
     
-//    struct MyLocation {
-//        static var point = (x,y)
-//    }
+
     
     // View Setup
         override func viewDidLoad() {
         super.viewDidLoad()
-        
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
         // Search Controller
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
-        
-        // Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Classroom", "Conference", "Theater"]
         tableView.tableHeaderView = searchController.searchBar
+        // Scope Bar
+        searchController.searchBar.scopeButtonTitles = ["All", "Classroom", "Conference", "Office"]
+        searchController.searchBar.delegate = self
+        
         
         rooms = [
             Room(category:"Classroom", name:"101", person:" "),
@@ -66,6 +73,7 @@ class MasterViewController: UITableViewController {
             Room(category:"Conference", name:"111", person:" "),
             Room(category:"Conference", name:"113", person:" "),
             Room(category:"Conference", name:"114", person:" "),
+            Room(category:"Office", name:"Dean's office", person:" "),
             Room(category:"Food", name:"120", person:" "),
             Room(category:"Office", name:"303A", person:"Balch Bradley"),
             Room(category:"Office", name:"302A", person:"Balch Tonya"),
@@ -109,15 +117,70 @@ class MasterViewController: UITableViewController {
             Room(category:"Office", name:"329C", person:"Whitaker Beth"),
             Room(category:"Office", name:"317B", person:"Whitaker Todd"),
             Room(category:"Office", name:"315A", person:"Woolard Cassandra"),
+            Room(category:"Classroom", name:"313", person:" "),
+            Room(category:"Classroom", name:"325", person:" "),
+            Room(category:"Conference", name:"322", person:" "),
             Room(category:"Theater", name:"124", person:" "),
-            Room(category:"All", name:"Second floor", person:" "),
-            Room(category:"All", name:"Third floor", person:" ")]
+            Room(category:"Classroom", name:"008A", person:" "),
+            Room(category:"Classroom", name:"008B", person:" "),
+            Room(category:"Classroom", name:"008R", person:" "),
+            Room(category:"Lab", name:"008O", person:" "),
+            Room(category:"Lab", name:"009P", person:" "),
+            Room(category:"Lab", name:"008Q", person:" "),
+            Room(category:"Resource", name:"008H", person:" "),
+            Room(category:"Resource", name:"008K", person:" "),
+            Room(category:"Office", name:"001A", person:" "),
+            Room(category:"Office", name:"001D", person:" "),
+            Room(category:"Office", name:"001E", person:" "),
+            Room(category:"Office", name:"001F", person:" "),
+            Room(category:"Office", name:"001G", person:" "),
+            Room(category:"Office", name:"001H", person:" "),
+            Room(category:"Office", name:"001I", person:" "),
+            Room(category:"Office", name:"001J", person:" "),
+            Room(category:"Office", name:"001K", person:" "),
+            Room(category:"Office", name:"001L", person:" "),
+            Room(category:"Office", name:"001M", person:" "),
+            Room(category:"Office", name:"001N", person:" "),
+            Room(category:"Office", name:"001O", person:" "),
+            Room(category:"Office", name:"001P", person:" "),
+            Room(category:"Office", name:"001Q", person:" "),
+            Room(category:"Office", name:"001T", person:" "),
+            Room(category:"Office", name:"001U", person:" "),
+            Room(category:"Office", name:"009", person:" "),
+            Room(category:"Office", name:"008I", person:" "),
+            Room(category:"Office", name:"008J", person:" "),
+            Room(category:"Office", name:"008K", person:" "),
+            Room(category:"Office", name:"008L", person:" "),
+            Room(category:"Office", name:"008M", person:" "),
+            Room(category:"Office", name:"008N", person:" "),
+            Room(category:"Base", name:"Second floor", person:" "),
+            Room(category:"Base", name:"Third floor", person:" "),
+            Room(category:"Base", name:"Garden level", person:" "),
+            Room(category:"Base", name:"First floor", person:" ")]
         
         if let splitViewController = splitViewController {
             let controllers = splitViewController.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? Draw2D
         }
     }
+    
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location:CLLocation = locations[0] as CLLocation
+        // print("latitude:\(location.coordinate.latitude)")
+        // print("longitude\(location.coordinate.longitude)")
+        long =  location.coordinate.longitude
+        lat =  location.coordinate.latitude
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        // print("Error while updating location" + error.localizedDescription)
+    }
+    
+    func locationManagerDidPauseLocationUpdates(manager: CLLocationManager) {
+        
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.collapsed
