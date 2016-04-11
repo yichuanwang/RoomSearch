@@ -8,6 +8,7 @@
 
 import UIKit
 
+<<<<<<< HEAD
 class Draw2D: DetailViewController {
   let drawView:Draw2DView = Draw2DView();
   
@@ -26,6 +27,12 @@ class Draw2D: DetailViewController {
   }
 
   
+=======
+class Draw2D: UIView {
+    
+    drawView.frame = self.view.bounds
+    swlf.view.addSubview(drawView)
+>>>>>>> origin/master
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -34,6 +41,7 @@ class Draw2D: DetailViewController {
         // Drawing code
     }
     */
+<<<<<<< HEAD
 //    func drawRect(rect: CGRect)
 //    {
 //        let context = UIGraphicsGetCurrentContext()
@@ -47,4 +55,19 @@ class Draw2D: DetailViewController {
 //        CGContextAddLineToPoint(context, 100, 100)
 //        CGContextStrokePath(context)
 //    }
+=======
+    override func drawRect(rect: CGRect)
+    {
+        let context = UIGraphicsGetCurrentContext()
+        CGContextSetLineWidth(context, 2.0)
+        CGContextSetStrokeColorWithColor(context,
+                                         UIColor.blueColor().CGColor)
+        CGContextMoveToPoint(context, 100, 100)
+        CGContextAddLineToPoint(context, 150, 150)
+        CGContextAddLineToPoint(context, 100, 200)
+        CGContextAddLineToPoint(context, 50, 150)
+        CGContextAddLineToPoint(context, 100, 100)
+        CGContextStrokePath(context)
+    }
+>>>>>>> origin/master
 }
