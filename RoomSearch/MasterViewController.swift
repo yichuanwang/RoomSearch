@@ -54,8 +54,21 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         // Scope Bar
         searchController.searchBar.scopeButtonTitles = ["All", "Classroom", "Conference", "Office"]
         searchController.searchBar.delegate = self
-        
-        
+          
+//        //for test
+//          rooms = [
+//            Room(category:"Conference", name:"114", person:" "),
+//            Room(category:"Food", name:"120", person:" "),
+//            Room(category:"Office", name:"303A", person:"Balch Bradley"),
+//            Room(category:"Conference", name:"322", person:" "),
+//            Room(category:"Theater", name:"124", person:" "),
+//            Room(category:"Classroom", name:"008R", person:" "),
+//            Room(category:"Lab", name:"008O", person:" "),
+//            Room(category:"Resource", name:"008K", person:" "),
+//            Room(category:"Office", name:"001A", person:" "),
+//            Room(category:"Base", name:"Second floor", person:" ")]
+          
+          
         rooms = [
             Room(category:"Classroom", name:"101", person:" "),
             Room(category:"Classroom", name:"102", person:" "),
@@ -146,7 +159,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             Room(category:"Office", name:"001Q", person:" "),
             Room(category:"Office", name:"001T", person:" "),
             Room(category:"Office", name:"001U", person:" "),
-            Room(category:"Office", name:"009", person:" "),
+            Room(category:"Office", name:"009",  person:" "),
             Room(category:"Office", name:"008I", person:" "),
             Room(category:"Office", name:"008J", person:" "),
             Room(category:"Office", name:"008K", person:" "),
@@ -197,7 +210,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active {
             return filteredRooms.count
         }
         return rooms.count
@@ -206,7 +219,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let room: Room
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active {
             room = filteredRooms[indexPath.row]
         } else {
             room = rooms[indexPath.row]
@@ -218,8 +231,26 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredRooms = rooms.filter({( room : Room) -> Bool in
-            let categoryMatch = (scope == "All") || (room.category == scope)
-            return categoryMatch && room.name.lowercaseString.containsString(searchText.lowercaseString) || room.person.lowercaseString.containsString(searchText.lowercaseString)
+          let categoryMatch = ((scope == "All") || (room.category == scope))
+          
+          if categoryMatch {
+            
+            let roomNameContains = room.name.lowercaseString.containsString(searchText.lowercaseString) || searchText == ""
+            let roomPersonContains = room.person.lowercaseString.containsString(searchText.lowercaseString) || searchText == ""
+            
+            let result =  roomNameContains || roomPersonContains
+            
+            if result {
+              print("add room");
+              
+            }else {
+
+            }
+            
+            return result;
+          }else {
+            return false;
+          }
         })
         tableView.reloadData()
     }
@@ -229,7 +260,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let room: Room
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active {
                     room = filteredRooms[indexPath.row]
                 } else {
                     room = rooms[indexPath.row]

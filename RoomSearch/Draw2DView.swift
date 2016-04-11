@@ -12,7 +12,7 @@ class Draw2DView: UIView {
     print(long)
     print(lat)
     
-    var s: NSString = "You Are Here"
+    let s: NSString = "You Are Here"
     
     // set the text color to dark gray
     let fieldColor: UIColor = UIColor.darkGrayColor()
@@ -21,13 +21,13 @@ class Draw2DView: UIView {
     let fieldFont = UIFont(name: "Helvetica Neue", size: 8)
     
     // set the line spacing to 6
-    var paraStyle = NSMutableParagraphStyle()
+    let paraStyle = NSMutableParagraphStyle()
     paraStyle.lineSpacing = 2.0
     
     // set the Obliqueness to 0.1
-    var skew = 0.1
+    let skew = 0.1
     
-    var attributes: NSDictionary = [
+    let attributes: NSDictionary = [
         NSForegroundColorAttributeName: fieldColor,
         NSParagraphStyleAttributeName: paraStyle,
         NSObliquenessAttributeName: skew,
@@ -44,7 +44,7 @@ class Draw2DView: UIView {
     CGContextAddLineToPoint(context, CGFloat(lat) - 20.0, CGFloat(long) + 20.0)
     CGContextAddLineToPoint(context, CGFloat(lat), CGFloat(long))
     CGContextStrokePath(context)
-    s.drawInRect(CGRectMake(CGFloat(lat) - 10.0, CGFloat(long) + 9.0, 40.0, 40.0), withAttributes: attributes as! [String : AnyObject])
+    s.drawInRect(CGRectMake(CGFloat(lat) - 10.0, CGFloat(long) + 9.0, 40.0, 40.0), withAttributes: attributes as? [String : AnyObject])
     
     //drawText(context!, text: "You", attributes: textAttributes, x: 50, y: 50)
    
