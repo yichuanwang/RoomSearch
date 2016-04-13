@@ -33,8 +33,6 @@ class Draw2D: DetailViewController {
     // Dispose of any resources that can be recreated.
   }
 
-  
-
 //class Draw2D: UIView {
     
  //   drawView.frame = self.view.bounds
@@ -48,5 +46,5 @@ class Draw2D: DetailViewController {
         // Drawing code
     }
     */
-    }
+}
 

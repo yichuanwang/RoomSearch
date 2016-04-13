@@ -1,24 +1,24 @@
 /*
-* Copyright (c) 2015 Razeware LLC
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*/
+ * Copyright (c) 2015 Razeware LLC
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 
 import UIKit
 import CoreLocation
@@ -35,16 +35,16 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     var locationManager: CLLocationManager!
     
-
+    
     
     // View Setup
-        override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
-            locationManager.startUpdatingLocation()
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
         // Search Controller
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
@@ -54,6 +54,19 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         // Scope Bar
         searchController.searchBar.scopeButtonTitles = ["All", "Classroom", "Conference", "Office"]
         searchController.searchBar.delegate = self
+        
+        //        //for test
+        //          rooms = [
+        //            Room(category:"Conference", name:"114", person:" "),
+        //            Room(category:"Food", name:"120", person:" "),
+        //            Room(category:"Office", name:"303A", person:"Balch Bradley"),
+        //            Room(category:"Conference", name:"322", person:" "),
+        //            Room(category:"Theater", name:"124", person:" "),
+        //            Room(category:"Classroom", name:"008R", person:" "),
+        //            Room(category:"Lab", name:"008O", person:" "),
+        //            Room(category:"Resource", name:"008K", person:" "),
+        //            Room(category:"Office", name:"001A", person:" "),
+        //            Room(category:"Base", name:"Second floor", person:" ")]
         
         
         rooms = [
@@ -74,6 +87,8 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             Room(category:"Conference", name:"113", person:" "),
             Room(category:"Conference", name:"114", person:" "),
             Room(category:"Office", name:"Dean's office", person:" "),
+            Room(category:"Office", name:"ESS", person: " "),
+            Room(category:"Wookroom", name:"110D", person:" "),
             Room(category:"Food", name:"120", person:" "),
             Room(category:"Office", name:"303A", person:"Balch Bradley"),
             Room(category:"Office", name:"302A", person:"Balch Tonya"),
@@ -92,8 +107,8 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             Room(category:"Office", name:"327C", person:"Hinshaw Rebecca"),
             Room(category:"Office", name:"321C", person:"Hinton Kandace"),
             Room(category:"Office", name:"321D", person:"Howard-Hamilton Mary"),
-            Room(category:"Office", name:"311A", person:"Hubnall Faith"),
-            Room(category:"Office", name:"315C", person:"Kinger Sue"),
+            Room(category:"Office", name:"311A", person:"Hudnall Faith"),
+            Room(category:"Office", name:"315C", person:"Kiger Sue"),
             Room(category:"Office", name:"323C", person:"Lai Feng-Qi"),
             Room(category:"Office", name:"329A", person:"Leinenbacj Marylin"),
             Room(category:"Office", name:"310C", person:"Liu Karen"),
@@ -146,7 +161,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             Room(category:"Office", name:"001Q", person:" "),
             Room(category:"Office", name:"001T", person:" "),
             Room(category:"Office", name:"001U", person:" "),
-            Room(category:"Office", name:"009", person:" "),
+            Room(category:"Office", name:"009",  person:" "),
             Room(category:"Office", name:"008I", person:" "),
             Room(category:"Office", name:"008J", person:" "),
             Room(category:"Office", name:"008K", person:" "),
@@ -197,7 +212,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active {
             return filteredRooms.count
         }
         return rooms.count
@@ -206,7 +221,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         let room: Room
-        if searchController.active && searchController.searchBar.text != "" {
+        if searchController.active {
             room = filteredRooms[indexPath.row]
         } else {
             room = rooms[indexPath.row]
@@ -218,8 +233,26 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredRooms = rooms.filter({( room : Room) -> Bool in
-            let categoryMatch = (scope == "All") || (room.category == scope)
-            return categoryMatch && room.name.lowercaseString.containsString(searchText.lowercaseString) || room.person.lowercaseString.containsString(searchText.lowercaseString)
+            let categoryMatch = ((scope == "All") || (room.category == scope))
+            
+            if categoryMatch {
+                
+                let roomNameContains = room.name.lowercaseString.containsString(searchText.lowercaseString) || searchText == ""
+                let roomPersonContains = room.person.lowercaseString.containsString(searchText.lowercaseString) || searchText == ""
+                
+                let result =  roomNameContains || roomPersonContains
+                
+                if result {
+//                    print("add room");
+                    
+                }else {
+                    
+                }
+                
+                return result;
+            }else {
+                return false;
+            }
         })
         tableView.reloadData()
     }
@@ -229,7 +262,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let room: Room
-                if searchController.active && searchController.searchBar.text != "" {
+                if searchController.active {
                     room = filteredRooms[indexPath.row]
                 } else {
                     room = rooms[indexPath.row]

@@ -12,8 +12,8 @@ class Draw2DView: UIView {
     print(long)
     print(lat)
     
+
    // let s: NSString = "You Are Here"
-    
     // set the text color to dark gray
     let fieldColor: UIColor = UIColor.darkGrayColor()
     
